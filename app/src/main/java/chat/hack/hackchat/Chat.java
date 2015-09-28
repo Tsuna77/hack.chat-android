@@ -48,10 +48,10 @@ public class Chat extends ActionBarActivity implements OnlineNavDrawerFragment.G
     EditText etMessage;
     ImageButton bSend;
 
-    final static String url = "wss://hack.chat/chat-ws";
+    final static String url = "ws://integ.yoob.fr:6667/";
 
     WebSocketClient ws;
-    String myNick = "", channel = "", lastSent = "";
+    String myNick = "", channel = "chat", lastSent = "";
     ArrayList<String> onlineList;
 
     ArrayList<MessageItem> messageList;

@@ -1,7 +1,5 @@
 package chat.hack.hackchat;
 
-import android.widget.TextView;
-
 /**
  * Created by Rudra on 12-07-2015.
  */
