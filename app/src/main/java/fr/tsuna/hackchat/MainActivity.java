@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -15,11 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import fr.tsuna.hackchat.R;
+
 public class MainActivity extends Activity {
-    EditText etChatroom;
+    EditText etChatroom,etServer;
     Button bEnter;
     public static final String prefsFile = "chatroomNicknameFile";
     public static final String KEY_CHATROOM = "lastChatroom";
+    public static final String KEY_URL = "lasturl";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         etChatroom = (EditText) findViewById(R.id.etChatroom);
+        etServer = (EditText) findViewById(R.id.etServer);
 
         Uri data = getIntent().getData();
 
@@ -40,9 +44,16 @@ public class MainActivity extends Activity {
         } else {
             SharedPreferences prefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
             String lastChatroom = prefs.getString(KEY_CHATROOM, "");
+            String lasturl = prefs.getString(KEY_URL, "");
 
             if (lastChatroom.length() > 0) {
                 etChatroom.setText(lastChatroom);
+            }
+            if (lasturl.length() > 0){
+                etServer.setText(lasturl);
+            }
+            else{
+                etServer.setText("wss://hack.chat/chat-ws");
             }
         }
 
@@ -61,9 +72,13 @@ public class MainActivity extends Activity {
                 if (etChatroom.getText().toString().trim().equals("")) {
                     return;
                 }
+                if (etServer.getText().toString().trim().equals("")) {
+                    return;
+                }
 
                 Intent i = new Intent(getBaseContext(), Chat.class);
                 i.putExtra(KEY_CHATROOM, etChatroom.getText().toString().trim());
+                i.putExtra(KEY_URL, etServer.getText().toString().trim());
                 startActivity(i);
             }
         });

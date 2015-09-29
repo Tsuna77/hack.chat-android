@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 
 import android.app.Activity;
@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import fr.tsuna.hackchat.R;
 
 
 /**

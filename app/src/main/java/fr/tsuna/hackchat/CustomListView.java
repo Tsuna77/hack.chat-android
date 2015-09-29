@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 import android.content.Context;
 import android.util.AttributeSet;

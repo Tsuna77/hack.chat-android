@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_material_dark"
-    tools:context="chat.hack.hackchat.OnlineNavDrawerFragment">
+    tools:context="fr.tsuna.hackchat.OnlineNavDrawerFragment">
 
     <TextView
         android:id="@+id/tvOnlineHeading"

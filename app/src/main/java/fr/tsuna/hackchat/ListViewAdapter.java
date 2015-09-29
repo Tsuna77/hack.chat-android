@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
+
+import fr.tsuna.hackchat.R;
 
 
 /**

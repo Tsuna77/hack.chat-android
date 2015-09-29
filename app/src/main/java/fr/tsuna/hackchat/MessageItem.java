@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 /**
  * Created by Rudra on 12-07-2015.

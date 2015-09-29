@@ -1,4 +1,4 @@
-package chat.hack.hackchat;
+package fr.tsuna.hackchat;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -35,6 +35,7 @@ import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.SystemClock;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,15 +44,16 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.util.ArrayList;
 
+import fr.tsuna.hackchat.R;
+
 public class Chat extends ActionBarActivity implements OnlineNavDrawerFragment.GetDataInterface, OnlineNavDrawerFragment.PassDataInterface {
     ListView lvMessages;
     EditText etMessage;
     ImageButton bSend;
 
-    final static String url = "ws://integ.yoob.fr:6667/";
 
     WebSocketClient ws;
-    String myNick = "", channel = "chat", lastSent = "";
+    String myNick = "", channel = "", lastSent = "", url = "";
     ArrayList<String> onlineList;
 
     ArrayList<MessageItem> messageList;
@@ -73,15 +75,19 @@ public class Chat extends ActionBarActivity implements OnlineNavDrawerFragment.G
     public static final String KEY_CHATROOM = "lastChatroom";
     public static final String KEY_NICKNAME = "lastNickname";
     public static final String KEY_JSON = "lastJson";
+    public static final String KEY_URL = "lasturl";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
 
+
         Bundle bundle = getIntent().getExtras();
+
+        url = bundle.getString(KEY_URL,"ws://integ.yoob.fr:6667/");
         channel = bundle.getString(KEY_CHATROOM);
-        setTitle(channel);
+        setTitle(url+"?"+channel);
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -191,6 +197,7 @@ public class Chat extends ActionBarActivity implements OnlineNavDrawerFragment.G
         SharedPreferences prefs = getSharedPreferences(prefsFile, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_CHATROOM, channel);
+        editor.putString(KEY_URL, url);
         editor.commit();
 
         // Get username
@@ -305,6 +312,7 @@ public class Chat extends ActionBarActivity implements OnlineNavDrawerFragment.G
                 pushMessage("!", "Server disconnected. Attempting to reconnect...", "", "warn", "");
                 reconnect = true;
                 if (exitUsingBackKey == false) {
+                    SystemClock.sleep(1500);
                     start();
                 }
             }
